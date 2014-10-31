@@ -12,14 +12,13 @@ strong coding standards and unit testing techniques.
 
 ## Dev Installation
 
-
-1) `git clone https://github.com/isuttell/Sol.js.git; cd Sol.js`
-2) `npm install`
-3) `npm test` // Make sure everything installed correctly
-4) `./bin/create-hooks-symlinks` // Setup sync git hooks
-5) `grunt` // Asset pipline and testing
-6) `node app.js` // Or alternative process manager, e.g.
-7) Open `http://localhost:3001` in a web browser.
+1. `git clone https://github.com/isuttell/Sol.js.git; cd Sol.js`
+2. `npm install`
+3. `npm test` // Make sure everything installed correctly
+4. `./bin/create-hooks-symlinks` // Setup sync git hooks
+5. `grunt` // Asset pipline and testing
+6. `node app.js` // Or alternative process manager, e.g.
+7. Open `http://localhost:3001` in a web browser.
 
 ## Assets
 Assets are located in the `assets` folder. Grunt automatically processes any
