@@ -2,7 +2,9 @@
   "name": "Sol",
   "version": "0.1.0",
   "description": "Node.js framework built around Express.js ",
-  "keywords": ["framework"],
+  "keywords": [
+    "framework"
+  ],
   "dependencies": {
     "async": "^0.9.0",
     "body-parser": "^1.9.2",
@@ -12,7 +14,7 @@
     "ejs": "^1.0.0",
     "express": "^4.10.1",
     "express-session": "^1.9.1",
-    "grunt-cli": "0.4.2",
+    "grunt-cli": "^0.1.13",
     "grunt-contrib-clean": "~0.5.0",
     "grunt-contrib-compass": "^0.9.0",
     "grunt-contrib-copy": "~0.5.0",
@@ -47,7 +49,7 @@
   "main": "app.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/isuttell/Sol.js.git"
+    "url": "https://github.com/isuttell/Sol.js.git"
   },
   "author": "Isaac Suttell <isaac@isaacsuttell.com>"
 }
