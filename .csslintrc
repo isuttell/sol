@@ -1,0 +1,18 @@
+{
+    "box-sizing"                 : true,
+    "display-property-grouping"  : true,
+    "duplicate-properties"       : true,
+    "empty-rules"                : true,
+    "known-properties"           : true,
+    "adjoining-classes"          : false,
+    "box-sizing"                 : false,
+    "compatible-vendor-prefixes" : true,
+    "fallback-colors"            : true,
+    "zero-units"                 : true,
+    "floats"                     : true,
+    "font-sizes"                 : true,
+    "ids"                        : true,
+    "important"                  : true,
+    "qualified-headings"         : true,
+    "unique-headings"            : true
+}
