@@ -16,14 +16,17 @@ describe('Router', function ()
         };
 
         mockControllers = {
-            'IndexController': {
-                index: function (req, res) {
-                    return res.send("index");
-                },
-                projects: function (req, res) {
-                    return res.send("projects");
-                }
-            }
+            'IndexController': function() {
+              return {
+                  index: function (req, res) {
+                      return res.send("index");
+                  },
+                  projects: function (req, res) {
+                      return res.send("projects");
+                  }
+                };
+              }
+            };
         };
 
         mockSol = {
@@ -54,7 +57,7 @@ describe('Router', function ()
 
         it('should parse router information', function(){
             var routeName = 'GET /',
-                route = new Router.Route(routeName, mockRoutes[routeName], mockControllers);
+                route = new Router.Route(mockSol, routeName, mockRoutes[routeName]);
 
             expect(route.route).toBe(routeName);
             expect(route.controller).toBe('IndexController');
@@ -66,21 +69,21 @@ describe('Router', function ()
 
         it('should default the verb to use if it finds an unrecognized method', function(){
             var routeName = 'ANY /status',
-                route = new Router.Route(routeName, mockRoutes[routeName], mockControllers);
+                route = new Router.Route(mockSol, routeName, mockRoutes[routeName]);
 
             expect(route.verb).toBe('use');
         });
 
         it('should return isValid as true if successful', function(){
             var routeName = 'GET /',
-                route = new Router.Route(routeName, mockRoutes[routeName], mockControllers);
+                route = new Router.Route(mockSol, routeName, mockRoutes[routeName]);
 
             expect(route.isValid).toBe(true);
         });
 
         it('should return isValid as false if there is no controller function', function(){
             var routeName = 'PUT /',
-                route = new Router.Route(routeName, mockRoutes[routeName], mockControllers);
+                route = new Router.Route(mockSol, routeName, mockRoutes[routeName]);
 
             expect(route.isValid).toBe(false);
         });

@@ -1,5 +1,5 @@
 /**
- * RouterFactory setups up routers for Express
+ * Router setups up routers for Express
  */
 
 /**
@@ -17,19 +17,17 @@ var express = require('express');
  * @return {express.Router}
  */
 function Router(sol) {
-  var routes = sol.config.routes;
-  var controllers = sol.controllers;
-
+  var routesConfig = sol.config.routes;
   var router = express.Router();
 
-  for (var route in routes) {
-    if (typeof routes[route] === 'string') {
-      route = new Route(route, routes[route], controllers);
+  for (var route in routesConfig) {
+    if (typeof routesConfig[route] === 'string') {
+      route = new Route(sol, route, routesConfig[route]);
 
       if (route.isValid) {
-        router[route.verb](                           // Method
-          route.uri,                                  // URI
-          route.action  // Controller Function
+        router[route.verb](  // Method
+          route.uri,         // URI
+          route.action       // Controller Function
         );
       }
     }
@@ -43,10 +41,18 @@ module.exports = Router;
 /**
  * Parse router and controller information so we can bind to a controller
  *
+ * @param    {Object}   sol          Sol instance
  * @param    {String}   route        string in the format of 'GET /project'
  * @param    {String}   controller   string in the format 'IndexController.home'
  */
-function Route(route, controller, controllers) {
+function Route(sol, route, controller) {
+  /**
+   * Internal reference to list of controllers
+   *
+   * @type    {Object}
+   */
+  var controllers = sol.controllers;
+
   /**
    * Check to see if this is a valid route to pass to Express
    *
@@ -94,7 +100,7 @@ function Route(route, controller, controllers) {
    */
   this.action = null;
   try {
-    this.action = controllers[this.controller][this.actionName];
+    this.action = controllers[this.controller](sol)[this.actionName];
   } catch (error) {
     this.isValid = false;
     console.error(error, this);

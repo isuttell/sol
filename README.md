@@ -74,23 +74,23 @@ Controllers are automatically loaded from the `api/controllers/` folder. Only
 files ending in `Controller.js` are read, e.g. `HomeController.js`.
 
 ````
-module.exports = {
-  // This action is passed directly to express. req and res allow access
-  // to Express.js request and response objects
-  index: function(req, res) {
-    var sol = this;
-    // Models are bound to 'this'
-    sol.user.find().exec(function(err, model){
-      if(err) {
-        res.status(500).send('Unable to create model');
-      }
-      return res.json(model);
-    });
-  },
-  projects: function(req, res) {
-    return res.render('projects');
-  }
-};
+module.exports = function(sol){
+  return {
+    // This action is passed directly to express. req and res allow access
+    // to Express.js request and response objects
+    index: function(req, res) {
+      sol.user.find().exec(function(err, model){
+        if(err) {
+          res.status(500).send('Unable to create model');
+        }
+        return res.json(model);
+      });
+    },
+    projects: function(req, res) {
+      return res.render('projects');
+    }
+  };
+}
 ````
 
 ## Views

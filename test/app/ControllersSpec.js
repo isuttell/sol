@@ -19,11 +19,11 @@ describe('Controllers', function() {
     expect(typeof new Controllers(mockSol)).toBe('object');
   });
 
-  it('should return a object of Controller objects', function() {
+  it('should return a object of Controller function', function() {
     var controllers = new Controllers(mockSol);
     expect(typeof controllers).toBe('object');
     for (var controller in controllers) {
-      expect(typeof controllers[controller] === 'object').toBe(true);
+      expect(typeof controllers[controller]).toBe('function');
     }
   });
 
@@ -31,9 +31,10 @@ describe('Controllers', function() {
     var controllers = new Controllers(mockSol),
       controllersLength = 0;
 
+
     // Count them up
     for (var controller in controllers) {
-      if (typeof controllers[controller] === 'object') {
+      if (typeof controllers[controller] === 'function') {
         controllersLength++;
       }
     }

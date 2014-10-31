@@ -22,15 +22,23 @@ var util = require('../lib/utilities');
 function Controllers(sol) {
   var controllers = util.loadModules(sol.paths.controllers, 'Controller');
 
-  /**
-   * Bind sol instance to this context for each action
-   */
   for (var name in controllers) {
     if (controllers.hasOwnProperty(name)) {
-      for (var action in controllers[name]) {
-        if (controllers[name].hasOwnProperty(action) &&
-            _.isFunction(controllers[name][action])) {
-          controllers[name][action] = _.bind(controllers[name][action], sol);
+
+      /**
+       * Pass Sol to the controller and get an object of actions back
+       *
+       * @type    {Object}
+       */
+      var controller = controllers[name](sol);
+
+      /**
+       * Bind sol instance to this context for each action
+       */
+      for (var action in controller) {
+        if (controller.hasOwnProperty(action) &&
+            _.isFunction(controller[action])) {
+          controller[action] = _.bind(controller[action], this);
         }
       }
     }

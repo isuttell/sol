@@ -2,8 +2,12 @@
  * ExamplesController
  */
 
-module.exports = {
-  index: function(req, res) {
-    res.render('example');
-  }
+module.exports = function(sol) {
+  return {
+    index: function(req, res) {
+      res.render('example', {
+        sol: sol
+      });
+    }
+  };
 };
