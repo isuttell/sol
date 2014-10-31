@@ -5,7 +5,7 @@
 /**
  * External Modules
  */
-var Waterline = require('Waterline');
+var Waterline = require('waterline');
 
 /**
  * Internal Modules
