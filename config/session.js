@@ -10,7 +10,7 @@ module.exports = {
    *
    * @type    {String}
    */
-  secret:  '032cfbef008f406d3b356839eaba54ea',
+  secret:  'change_this',
 
   /**
    * Express
@@ -43,18 +43,26 @@ module.exports = {
   saveUninitialized: true,
 
   /**
-   * Setup Redis
+   * To use redis for sessions uncomment out the adapter line below
+   *
+   * https://github.com/tj/connect-redis
    *
    * @type    {String}
    */
-  adapter: 'redis',
+  // adapter: 'redis',
 
+  /**
+   * Confirmation options that are passed to the RedisStore when Resis is
+   * enabled
+   *
+   * @type    {Object}
+   */
   redis: {
     host: 'localhost',
     port: 6379,
     ttl: 24 * 60 * 60,
     db: 0,
-    // pass: '',
+    pass: 'secret',
     prefix: 'sess:'
   }
 

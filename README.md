@@ -109,3 +109,21 @@ coding standards, and unit tests. Prior to every commit, all three must pass.
 Grunt configuration files are split into two directorys and automatically loaded.
 Each task gets its own file in the `tasks/config` directory. Additional custum
 tasks are registered in the `tasks/regsiter` folder.
+
+
+### Sessions
+Be default cookies are used. To enable Redis, uncomment out the adapter line in
+`config/sessions.js`
+
+````
+  // adapter: 'redis', // Uncomment this to enable
+
+  redis: {
+    host: 'localhost',
+    port: 6379,
+    ttl: 24 * 60 * 60,
+    db: 0,
+    pass: 'secret',
+    prefix: 'sess:'
+  }
+````
