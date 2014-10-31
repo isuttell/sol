@@ -15,8 +15,6 @@
 
 module.exports = {
 
-  'GET /' : 'IndexController.index',
-
-  'GET /projects' : 'IndexController.projects'
+  'GET /' : 'ExampleController.index'
 
 };

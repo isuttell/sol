@@ -11,7 +11,7 @@ module.exports = {
   mongodb: {
     adapter: 'sails-mongo',
     host: 'localhost',
-    database: 'mc2'
+    database: 'sol'
   }
 
 };
