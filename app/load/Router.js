@@ -6,7 +6,6 @@
  * Dependencies
  */
 var express = require('express');
-var _ = require('lodash');
 
 // var util = require('../lib/utilities');
 
