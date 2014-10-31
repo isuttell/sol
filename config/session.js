@@ -10,7 +10,7 @@ module.exports = {
    *
    * @type    {String}
    */
-  secret:  'change_this',
+  secret: 'change_this',
 
   /**
    * Express

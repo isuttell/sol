@@ -12,23 +12,23 @@
  */
 module.exports = function(grunt) {
 
-    grunt.config.set('jasmine_node', {
-        options: {
-            forceExit: true,
-            match: '.',
-            matchall: false,
-            extensions: 'js',
-            specNameMatcher: 'Spec',
-            helperNameMatcher: 'Helpers',
-            jUnit: {
-                report: true,
-                savePath: "./test/reports/jasmine/",
-                useDotNotation: true,
-                consolidate: true
-            }
-        },
-        app: ['./test/app/']
-    });
+  grunt.config.set('jasmine_node', {
+    options: {
+      forceExit: true,
+      match: '.',
+      matchall: false,
+      extensions: 'js',
+      specNameMatcher: 'Spec',
+      helperNameMatcher: 'Helpers',
+      jUnit: {
+        report: true,
+        savePath: "./test/reports/jasmine/",
+        useDotNotation: true,
+        consolidate: true
+      }
+    },
+    app: ['./test/app/']
+  });
 
-    grunt.loadNpmTasks('grunt-jasmine-node');
+  grunt.loadNpmTasks('grunt-jasmine-node');
 };

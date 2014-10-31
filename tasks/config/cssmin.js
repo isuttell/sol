@@ -8,17 +8,17 @@
  */
 module.exports = function(grunt) {
 
-    grunt.config.set('cssmin', {
-        build: {
-            files: [{
-                expand: true,
-                cwd: '.tmp/public/css/',
-                src: ['*.css'],
-                dest: 'www/css/',
-                ext: '.min.css'
-            }]
-        }
-    });
+  grunt.config.set('cssmin', {
+    build: {
+      files: [{
+        expand: true,
+        cwd: '.tmp/public/css/',
+        src: ['*.css'],
+        dest: 'www/css/',
+        ext: '.min.css'
+      }]
+    }
+  });
 
-    grunt.loadNpmTasks('grunt-contrib-cssmin');
+  grunt.loadNpmTasks('grunt-contrib-cssmin');
 };

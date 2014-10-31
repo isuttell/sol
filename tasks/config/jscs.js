@@ -12,26 +12,26 @@
  */
 module.exports = function(grunt) {
 
-    grunt.config.set('jscs', {
-        options: {
-            config: ".jscsrc"
-        },
-        api: {
-            files: {
-                src: ["api/**/*.js", "config/*.js"]
-            }
-        },
-        app: {
-            files: {
-                src: ["app.js", "app/**/*.js"]
-            }
-        },
-        frontend: {
-            files: {
-                src: [".tmp/public/js/**/*.js"]
-            }
-        }
-    });
+  grunt.config.set('jscs', {
+    options: {
+      config: ".jscsrc"
+    },
+    api: {
+      files: {
+        src: ["api/**/*.js", "config/*.js"]
+      }
+    },
+    app: {
+      files: {
+        src: ["app.js", "app/**/*.js"]
+      }
+    },
+    frontend: {
+      files: {
+        src: [".tmp/public/js/**/*.js"]
+      }
+    }
+  });
 
-    grunt.loadNpmTasks('grunt-jscs');
+  grunt.loadNpmTasks('grunt-jscs');
 };
