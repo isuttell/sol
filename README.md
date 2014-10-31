@@ -131,3 +131,12 @@ Be default cookies are used. To enable Redis, uncomment out the adapter line in
 ### Bower
 Bower components are automatically installed in the `assets/components` folder
 and intergrated into the asset pipeline
+
+### Todo
+
+* Split `app` into it's own module
+* Create better example
+* Setup CORs for APIs
+* Create better environment switching
+* Implement better logging system
+* Implement CSRF
