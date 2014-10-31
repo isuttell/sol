@@ -1,6 +1,8 @@
 # Sol.js
 Node.js framework built around Express.js
 
+[![Build Status](https://travis-ci.org/isuttell/Sol.js.svg)](https://travis-ci.org/isuttell/Sol.js)
+
 - - -
 
 ## Description
