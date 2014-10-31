@@ -24,12 +24,14 @@ function Router(sol) {
 
   for (var route in routes) {
     if (typeof routes[route] === 'string') {
-      route = new Route(route, routes[route]);
+      route = new Route(route, routes[route], controllers);
 
-      router[route.verb](                           // Method
-        route.uri,                                  // URI
-        controllers[route.controller][route.action] // Controller Function
-      );
+      if (route.isValid) {
+        router[route.verb](                           // Method
+          route.uri,                                  // URI
+          route.action  // Controller Function
+        );
+      }
     }
   }
 
@@ -44,20 +46,92 @@ module.exports = Router;
  * @param    {String}   route        string in the format of 'GET /project'
  * @param    {String}   controller   string in the format 'IndexController.home'
  */
-function Route(route, controller) {
+function Route(route, controller, controllers) {
+  /**
+   * Check to see if this is a valid route to pass to Express
+   *
+   * @type    {Boolean}
+   */
+  this.isValid = true;
+
+  /**
+   * Save the raw route string
+   *
+   * @type    {String}
+   */
   this.route = route;
 
-  controller = controller.split('.');
-  this.controller = controller[0];
-  this.action = controller[1];
+  /**
+   * Get the name of the controller
+   *
+   * @type    {String}
+   */
+  try {
+    controller = controller.split('.');
+    this.controller = controller[0];
+  } catch (error) {
+    this.isValid = false;
+    console.error(error, this);
+  }
 
-  route = route.split(' ');
-  this.uri = route[1];
+  /**
+   * Get the name of the function in the controller
+   *
+   * @type    {String}
+   */
+  this.actionName = null;
+  try {
+    this.actionName = controller[1];
+  } catch (error) {
+    this.isValid = false;
+    console.error(error, this);
+  }
 
-  this.verb = route[0].toLowerCase();
+  /**
+   * Look for a valid action in the controller
+   *
+   * @type    {function}
+   */
+  this.action = null;
+  try {
+    this.action = controllers[this.controller][this.actionName];
+  } catch (error) {
+    this.isValid = false;
+    console.error(error, this);
+  }
+  if (typeof this.action !== 'function') {
+    this.isValid = false;
+    console.error('Controller is not a function', this);
+  }
 
-  if (!this.verb.match(/get|post/i)) {
-    this.verb = 'use';
+  /**
+   * Grab the uri of the route
+   *
+   * @type    {String}
+   */
+  this.uri = null;
+  try {
+    route = route.split(' ');
+    this.uri = route[1];
+  } catch (error) {
+    this.isValid = false;
+    console.error(error, this);
+  }
+
+  /**
+   * Get the method to use and fall back to use if we don't recognize anything
+   *
+   * @type    {String}
+   */
+  this.verb = null;
+  try {
+    this.verb = route[0].toLowerCase();
+    if (!this.verb.match(/get|post|put|create|delete|head/i)) {
+      this.verb = 'use';
+    }
+  } catch (error) {
+    this.isValid = false;
+    console.error(error, this);
   }
 }
 

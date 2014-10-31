@@ -11,7 +11,8 @@ describe('Router', function ()
         mockRoutes = {
             'GET /' : 'IndexController.index',
             'GET /projects' : 'IndexController.projects',
-            'ANY /status' : 'IndexController.index'
+            'ANY /status' : 'IndexController.index',
+            'PUT /status' : 'IndexController.put'
         };
 
         mockControllers = {
@@ -53,20 +54,35 @@ describe('Router', function ()
 
         it('should parse router information', function(){
             var routeName = 'GET /',
-                route = new Router.Route(routeName, mockRoutes[routeName]);
+                route = new Router.Route(routeName, mockRoutes[routeName], mockControllers);
 
             expect(route.route).toBe(routeName);
             expect(route.controller).toBe('IndexController');
-            expect(route.action).toBe('index');
+            expect(typeof route.action).toBe('function');
             expect(route.uri).toBe('/');
             expect(route.verb).toBe('get');
+            expect(route.isValid).toBe(true);
         });
 
         it('should default the verb to use if it finds an unrecognized method', function(){
             var routeName = 'ANY /status',
-                route = new Router.Route(routeName, mockRoutes[routeName]);
+                route = new Router.Route(routeName, mockRoutes[routeName], mockControllers);
 
             expect(route.verb).toBe('use');
+        });
+
+        it('should return isValid as true if successful', function(){
+            var routeName = 'GET /',
+                route = new Router.Route(routeName, mockRoutes[routeName], mockControllers);
+
+            expect(route.isValid).toBe(true);
+        });
+
+        it('should return isValid as false if there is no controller function', function(){
+            var routeName = 'PUT /',
+                route = new Router.Route(routeName, mockRoutes[routeName], mockControllers);
+
+            expect(route.isValid).toBe(false);
         });
     });
 });
