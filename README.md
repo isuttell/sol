@@ -127,3 +127,7 @@ Be default cookies are used. To enable Redis, uncomment out the adapter line in
     prefix: 'sess:'
   }
 ````
+
+### Bower
+Bower components are automatically installed in the `assets/components` folder
+and intergrated into the asset pipeline
