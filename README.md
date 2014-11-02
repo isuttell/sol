@@ -8,25 +8,20 @@ An experiment in creating a simple and lean node.js framework that forces
 strong coding standards and unit testing techniques.
 
 
-## Dev Installation
+## Setup
 
-1. `git clone https://github.com/isuttell/sol.git; cd sol`
-2. `npm install`
-3. `npm test` // Make sure everything installed correctly
-4. `./bin/create-hooks-symlinks` // Setup sync git hooks
-5. `grunt` // Asset pipline and testing
-6. `node app.js` // Or alternative process manager, e.g.
-7. Open `http://localhost:3001` in a web browser.
+1. Download [https://github.com/isuttell/sol/archive/v0.1-alpha.tar.gz](https://github.com/isuttell/sol/archive/v0.1-alpha.tar.gz)
+2. Untar `tar -zxf v0.1-alpha.tar.gz && cd sol-0.1-alpha`
+3. Install `npm install`
+4. `node app.js` // Or alternative process manager, e.g.
+5. Open [http://localhost:3001]([http://localhost:3001]) in a web browser.
 
 ## Assets
-Assets are located in the `assets` folder. Grunt automatically processes any
-changes in this folder into the `.tmp` directory. During this process things
-like Compass/SCSS are run. Everything in this folder should not be compressed or
-minified. By default, the app uses `.tmp/public` as a static folder.
 
-For production, run `grunt build` this copies and compiles the assets into the
-`www` folder. This is the folder that should be used as the static asset folder
-on a production server.
+Running `grunt` will automatically watch the assets folder and update it for
+development. Assets are located in the `assets` folder. Grunt automatically processes any changes in this folder into the `.tmp` directory. During this process things like Compass/SCSS are run. Everything in this folder should not be compressed or minified. By default, the app uses `.tmp/public` as a static folder.
+
+For production, run `grunt build` this copies and compiles the assets into the `www` folder. This is the folder that should be used as the static asset folder on a production server.
 
 
 ## Routes
