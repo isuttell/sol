@@ -24,14 +24,6 @@ module.exports = function(grunt) {
         src: ['api/**/*.js', 'config/*.js']
       }
     },
-    app: {
-      options: {
-        node: true
-      },
-      files: {
-        src: ['app.js', 'app/**/*.js']
-      }
-    },
     frontend: {
       options: {
         browser: true,

@@ -23,15 +23,6 @@ module.exports = function(grunt) {
       tasks: ['jshint:api', 'jscs:api']
     },
 
-    app: {
-
-      // App files to watch:
-      files: ['app/**/*', "app.js", "test/app/**/*.js"],
-
-      // When app changes run tests
-      tasks: ['jshint:app', 'jscs:app', 'jasmine_node:app']
-    },
-
     assets: {
       // Assets to watch:
       files: ['assets/**/*', '!assets/css/**/*.scss'],

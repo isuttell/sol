@@ -1,8 +1,6 @@
 # Sol.js
 Node.js framework built around Express.js
 
-[![Build Status](https://travis-ci.org/isuttell/Sol.js.svg)](https://travis-ci.org/isuttell/Sol.js)
-
 - - -
 
 ## Description
@@ -12,7 +10,7 @@ strong coding standards and unit testing techniques.
 
 ## Dev Installation
 
-1. `git clone https://github.com/isuttell/Sol.js.git; cd Sol.js`
+1. `git clone https://github.com/isuttell/sol.git; cd sol`
 2. `npm install`
 3. `npm test` // Make sure everything installed correctly
 4. `./bin/create-hooks-symlinks` // Setup sync git hooks
@@ -133,7 +131,6 @@ and intergrated into the asset pipeline
 
 ### Todo
 
-* Split `app` into it's own module
 * Create better example
 * Setup CORs for APIs
 * Create better environment switching

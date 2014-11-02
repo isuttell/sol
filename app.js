@@ -15,7 +15,7 @@ process.chdir(__dirname);
  *
  * @type    {Object}
  */
-var Sol = require('./app/Sol');
+var Sol = require('sol-core');
 
 /**
  * Run Sol instance

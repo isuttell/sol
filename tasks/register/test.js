@@ -1,12 +1,7 @@
 module.exports = function(grunt) {
-  grunt.registerTask('test:js', [
+  grunt.registerTask('test', [
     'copy:dev',
     'jshint',
-    'jscs',
-    'jasmine_node:app'
-  ]);
-
-  grunt.registerTask('test', [
-    'test:js'
+    'jscs'
   ]);
 };
