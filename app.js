@@ -20,4 +20,4 @@ var Sol = require('sol-core');
 /**
  * Run Sol instance
  */
-Sol.run();
+Sol.setup().listen();
