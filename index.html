@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Sol.js by isuttell</title>
+    <title>Sol.js</title>
 
     <link rel="stylesheet" href="stylesheets/styles.css">
     <link rel="stylesheet" href="stylesheets/pygment_trac.css">
@@ -15,8 +15,8 @@
   <body>
     <div class="wrapper">
       <header>
-        <h1>Sol.js</h1>
-        <p>An experiment in creating a simple node.js framework that encourages strong coding standards and unit testing techniques.</p>
+        <h1>Sol.js v0.1-alpha</h1>
+        <p>An experiment to create a framework that is quick to setup, and easy to test.</p>
 
         <p class="view"><a href="https://github.com/isuttell/sol">View the Project on GitHub <small>isuttell/sol</small></a></p>
 
@@ -28,137 +28,120 @@
       </header>
       <section>
 
-<h2>
-<a name="setup" class="anchor" href="#setup"><span class="octicon octicon-link"></span></a>Setup</h2>
+        <h2><a name="setup" class="anchor" href="#setup"><span class="octicon octicon-link"></span></a>Setup</h2>
 
-<ol>
-<li>Download <a href="https://github.com/isuttell/sol/tarball/master">Latest Master</a> and untar.
-</li>
-<li>Install with <code>npm install</code>
-</li>
-<li>
-Run <code>node app.js</code> or use a process manager, e.g. <code><a href="https://github.com/Unitech/pm2">pm2</a> start app.js</code></li>
-<li>Open <a href="http://localhost:3001">http://localhost:3001</a> in a web browser.</li>
-</ol>
+        <ol>
+          <li>Download <a href="https://github.com/isuttell/sol/tarball/master">Master</a> and untar.</li>
+          <li>Install with <code>npm install</code></li>
+          <li>Run <code>node app.js</code> or use a process manager, e.g. <code><a href="https://github.com/Unitech/pm2">pm2</a> start app.js</code></li>
+          <li>Open <a href="http://localhost:3001">http://localhost:3001</a> in a web browser.</li>
+        </ol>
 
-<h2>
-<a name="assets" class="anchor" href="#assets"><span class="octicon octicon-link"></span></a>Assets</h2>
+        <h2><a name="assets" class="anchor" href="#assets"><span class="octicon octicon-link"></span></a>Assets</h2>
 
-<p>Running <code>grunt</code> will automatically watch the assets folder and update it for
-development. Assets are located in the <code>assets</code> folder. Grunt automatically processes any changes in this folder into the <code>.tmp</code> directory. During this process things like Compass/SCSS are run. Everything in this folder should not be compressed or minified. By default, the app uses <code>.tmp/public</code> as a static folder.</p>
+        <p>Assets are kept in the <code>assets</code> folder. Running <code>grunt</code> will automatically watch the assets folder and keep it in sync it for development. Everytime an asset changes it's copied/processed into to the <code>.tmp/public</code> folder. For example, SCSS files are compiled and unminified when they are changed.</p>
 
-<p>For production, run <code>grunt build</code> this copies and compiles the assets into the <code>www</code> folder. This is the folder that should be used as the static asset folder on a production server.</p>
+        <p>For production, run <code>grunt build</code> this copies, minifies, et cetera, the assets into the <code>www</code> folder. This is the folder that should be used as the static asset folder on a production server.</p>
 
-<h2>
-<a name="routes" class="anchor" href="#routes"><span class="octicon octicon-link"></span></a>Routes</h2>
+        <h2><a name="routes" class="anchor" href="#routes"><span class="octicon octicon-link"></span></a>Routes</h2>
 
-<p>Routes are defined in <code>config/routes.js</code>:</p>
+        <p>Routes are defined in <code>config/routes.js</code>:</p>
 
-<pre><code>// Format
-'VERB /uri' : '*Controller.action',
+        <pre><code>// Format
+        'VERB /uri' : '*Controller.action',
 
-// Examples
-'GET /' : 'IndexController.index',
-'GET /users' : 'UserController.index',
-'POST /user' : 'UserController.post',
-</code></pre>
+        // Examples
+        'GET /' : 'IndexController.index',
+        'GET /users' : 'UserController.users',
+        'POST /user' : 'UserController.post',
+        </code></pre>
 
-<h2>
-<a name="model" class="anchor" href="#model"><span class="octicon octicon-link"></span></a>Model</h2>
+        <h2><a name="controllers" class="anchor" href="#controllers"><span class="octicon octicon-link"></span></a>Controllers</h2>
 
-<p>Sol.js use <a href="https://github.com/balderdashy/waterline">Waterline</a> as an ORM.
-Model definitions are automaticall loaded from the <code>api/models/</code> folder. Only
-files ending in <code>Model.js</code> are read, e.g. <code>UserModel.js</code>.</p>
+        <p>Controllers are automatically loaded from the <code>api/controllers/</code> folder. Only
+        files ending in <code>Controller.js</code> are read, e.g. <code>HomeController.js</code>.</p>
 
-<pre><code>module.exports = {
-
-  identity: 'User', // This name is used in Controllers to access it
-
-  connection: 'localDisk', // Adapter defined in config/connections
-
-  attributes: {
-    firstName: 'string',
-    lastName: 'string'
-  }
-
-};
-</code></pre>
-
-<h2>
-<a name="controllers" class="anchor" href="#controllers"><span class="octicon octicon-link"></span></a>Controllers</h2>
-
-<p>Controllers are automatically loaded from the <code>api/controllers/</code> folder. Only
-files ending in <code>Controller.js</code> are read, e.g. <code>HomeController.js</code>.</p>
-
-<pre><code>module.exports = function(sol){
-  return {
-    // This action is passed directly to express. req and res allow access
-    // to Express.js request and response objects
-    index: function(req, res) {
-      sol.user.find().exec(function(err, model){
-        if(err) {
-          res.status(500).send('Unable to create model');
+        <pre><code>module.exports = function(sol){
+          return {
+            // This action is passed directly to express. req and res allow access
+            // to Express.js request and response objects
+            index: function(req, res) {
+              sol.user.find().exec(function(err, model){
+                if(err) {
+                  res.status(500).send('Unable to create model');
+                }
+                return res.json(model);
+              });
+            },
+            users: function(req, res) {
+              return res.render('projects');
+            }
+          };
         }
-        return res.json(model);
-      });
-    },
-    projects: function(req, res) {
-      return res.render('projects');
-    }
-  };
-}
-</code></pre>
+        </code></pre>
 
-<h2>
-<a name="views" class="anchor" href="#views"><span class="octicon octicon-link"></span></a>Views</h2>
+        <h2><a name="model" class="anchor" href="#model"><span class="octicon octicon-link"></span></a>Models</h2>
 
-<p>Views are located in the views folder and use ejs by default; To render a view,
-use the <code>res.render(view, data)</code> function in a controller action.</p>
+        <p>Sol.js use <a href="https://github.com/balderdashy/waterline">Waterline</a> as an ORM.
+        Model definitions are automaticall loaded from the <code>api/models/</code> folder. Only
+        files ending in <code>Model.js</code> are read, e.g. <code>UserModel.js</code>.</p>
 
-<h2>
-<a name="coding-standards-and-unit-testing" class="anchor" href="#coding-standards-and-unit-testing"><span class="octicon octicon-link"></span></a>Coding Standards and Unit Testing</h2>
+        <pre><code>module.exports = {
 
-<p>All JS follows <a href="https://google-styleguide.googlecode.com/svn/trunk/javascriptguide.xml">Google Coding Standards</a>. This can be changed in <code>.jscsrc</code>. Every time
-grunt detects a change in code, it automatically checks for linting issues,
-coding standards, and unit tests. Prior to every commit, all three must pass.</p>
+          identity: 'User', // This name is used in Controllers to access it
 
-<h2>
-<a name="grunt-configuration" class="anchor" href="#grunt-configuration"><span class="octicon octicon-link"></span></a>Grunt Configuration</h2>
+          connection: 'localDisk', // Adapter defined in config/connections
 
-<p>Grunt configuration files are split into two directorys and automatically loaded.
-Each task gets its own file in the <code>tasks/config</code> directory. Additional custum
-tasks are registered in the <code>tasks/regsiter</code> folder.</p>
+          attributes: {
+            firstName: 'string',
+            lastName: 'string'
+          }
 
-<h3>
-<a name="sessions" class="anchor" href="#sessions"><span class="octicon octicon-link"></span></a>Sessions</h3>
+        };
+        </code></pre>
 
-<p>Be default cookies are used. To enable Redis, uncomment out the adapter line in
-<code>config/sessions.js</code></p>
+        <h2><a name="views" class="anchor" href="#views"><span class="octicon octicon-link"></span></a>Views</h2>
 
-<pre><code>  // adapter: 'redis', // Uncomment this to enable
+        <p>Views are located in the views folder and use ejs by default; To render a view,
+        use the <code>res.render(view, data)</code> function in a controller action.</p>
 
-  redis: {
-    host: 'localhost',
-    port: 6379,
-    ttl: 24 * 60 * 60,
-    db: 0,
-    pass: 'secret',
-    prefix: 'sess:'
-  }
-</code></pre>
+        <h2><a name="coding-standards-and-unit-testing" class="anchor" href="#coding-standards-and-unit-testing"><span class="octicon octicon-link"></span></a>Coding Standards and Unit Testing</h2>
 
-<h3>
-<a name="bower" class="anchor" href="#bower"><span class="octicon octicon-link"></span></a>Bower</h3>
+        <p>All JS follows <a href="https://google-styleguide.googlecode.com/svn/trunk/javascriptguide.xml">Google Coding Standards</a>. This can be changed in <code>.jscsrc</code>. Every time
+        grunt detects a change in code, it automatically checks for linting issues,
+        coding standards, and unit tests. Prior to every commit, all three must pass.</p>
 
-<p>Bower components are automatically installed in the <code>assets/components</code> folder
-and intergrated into the asset pipeline</p>
+        <h2><a name="grunt-configuration" class="anchor" href="#grunt-configuration"><span class="octicon octicon-link"></span></a>Grunt</h2>
 
-<h3>
-<a name="todo" class="anchor" href="#todo"><span class="octicon octicon-link"></span></a>Todo</h3>
+        <p>Grunt configuration files are split into two directorys and automatically loaded.
+        Each task gets its own file in the <code>tasks/config</code> directory. Additional custum
+        tasks are registered in the <code>tasks/regsiter</code> folder.</p>
+
+        <h2><a name="application-setup" class="anchor" href="#application-setup"><span class="octicon octicon-link"></span></a>Application Setup</h2>
+        <h3><a name="sessions" class="anchor" href="#sessions"><span class="octicon octicon-link"></span></a>Sessions</h3>
+
+        <p>Be default cookies are used. To enable Redis, uncomment out the adapter line in
+        <code>config/sessions.js</code></p>
+
+        <pre><code>  // adapter: 'redis', // Uncomment this to enable
+
+          redis: {
+            host: 'localhost',
+            port: 6379,
+            ttl: 24 * 60 * 60,
+            db: 0,
+            pass: 'secret',
+            prefix: 'sess:'
+          }
+        </code></pre>
+
+        <h3><a name="bower" class="anchor" href="#bower"><span class="octicon octicon-link"></span></a>Bower</h3>
+
+        <p>Bower components are automatically installed in the <code>assets/components</code> folder
+        and intergrated into the asset pipeline</p>
       </section>
       <footer>
         <p>This project is maintained by <a href="https://github.com/isuttell">isuttell</a></p>
-        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
       </footer>
     </div>
     <script src="javascripts/scale.fix.js"></script>
