@@ -6,9 +6,7 @@ Node.js framework built around Express.js
 - - -
 
 ## Description
-An experiment in creating a simple and lean node.js framework that forces
-strong coding standards and unit testing techniques.
-
+An experiment to create a framework that is quick to setup, and easy to test.
 
 ## Documentation
 
