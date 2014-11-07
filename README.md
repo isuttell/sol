@@ -4,6 +4,7 @@ Node.js framework built around Express.js
 [![Build Status](https://travis-ci.org/isuttell/sol-core.svg)](https://travis-ci.org/isuttell/sol-core)
 [![Dependency Status](https://david-dm.org/isuttell/sol.svg)](https://david-dm.org/isuttell/sol)
 [![devDependency Status](https://david-dm.org/isuttell/sol/dev-status.svg)](https://david-dm.org/isuttell/sol#info=devDependencies)
+[![GitHub version](https://badge.fury.io/gh/isuttell%2Fsol.svg)](http://badge.fury.io/gh/isuttell%2Fsol)
 
 - - -
 
