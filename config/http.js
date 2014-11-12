@@ -17,6 +17,7 @@ module.exports = {
       'json',
       'compress',
       'logger',
+      'policies',
       'router',
       'static',
       '404',

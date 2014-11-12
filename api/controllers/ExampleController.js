@@ -8,6 +8,9 @@ module.exports = function(sol) {
       res.render('example', {
         sol: sol
       });
+    },
+    admin: function(req, res) {
+      res.send('Admin');
     }
   };
 };
